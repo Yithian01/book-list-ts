@@ -1,10 +1,9 @@
-// src/app/App.tsx
-import { BookListPage } from '../features/book-list/pages/BookListPage';
+import HomePage from '../pages/home/ui/HomePage'; 
 
 function App() {
   return (
-    <div className="App">
-      <BookListPage />
+    <div className="app">
+      <HomePage />
     </div>
   );
 }
