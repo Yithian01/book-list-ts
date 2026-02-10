@@ -7,8 +7,15 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      // 💡 반드시 __dirname을 사용하여 절대 경로를 만들어야 합니다.
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+      },
     },
   },
 })
