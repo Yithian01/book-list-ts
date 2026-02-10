@@ -1,5 +1,5 @@
 // src/entities/user/model/types.ts
-import type { Book, OwnedBook } from '@/entities/book';
+import type { OwnedBook } from '@/entities/book';
 
 export type Gender = 'male' | 'female';
 
