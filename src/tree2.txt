@@ -1,0 +1,75 @@
+폴더 PATH의 목록입니다.
+볼륨 일련 번호는 EAA6-E1DC입니다.
+C:.
+|   main.tsx
+|   tree2.txt
+|   vite-env.d.ts
+|   
++---app
+|   |   App.tsx
+|   |   
+|   \---providers
++---entities
+|   +---book
+|   |   |   index.ts
+|   |   |   
+|   |   +---model
+|   |   |       types.ts
+|   |   |       
+|   |   \---ui
+|   |           BookCard.tsx
+|   |           
+|   \---user
+|       |   index.ts
+|       |   
+|       \---model
+|               store.ts
+|               types.ts
+|               
++---features
+|   +---purchase-book
+|   |   |   index.ts
+|   |   |   
+|   |   \---ui
+|   |           PurchaseButton.tsx
+|   |           
+|   +---read-book
+|   |   |   index.ts
+|   |   |   
+|   |   \---ui
+|   |           ReadButton.tsx
+|   |           
+|   \---sell-book
+|       |   index.ts
+|       |   
+|       \---ui
+|               SellButton.tsx
+|               
++---pages
+|   +---home
+|   |   \---ui
+|   |           HomePage.tsx
+|   |           
+|   \---null
++---shared
+|   +---null
+|   \---ui
+\---widgets
+    +---book-shop
+    |   |   index.ts
+    |   |   
+    |   \---ui
+    |           BookShop.tsx
+    |           
+    +---inventory
+    |   |   index.ts
+    |   |   
+    |   \---ui
+    |           Inventory.tsx
+    |           
+    \---user-status
+        |   index.ts
+        |   
+        \---ui
+                UserStatus.tsx
+                
