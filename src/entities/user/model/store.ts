@@ -1,8 +1,7 @@
 // src/entities/user/model/store.ts
 import { create } from 'zustand';
-import type { OwnedBook } from '@/entities/book';
 import type { UserState } from '@/entities/user';
-import { fetchInitialMember } from '../api';
+import { fetchInitialMember, fetchMyBooks } from '../api';
 
 export const useUserStore = create<UserState>((set) => ({
   user: { uuid: '', name: '', balance: 0, age: 0, gender: 'male' },
@@ -10,40 +9,22 @@ export const useUserStore = create<UserState>((set) => ({
 
   initUser: async () => {
     try {
-      const response = await fetchInitialMember(); 
+      const userRes = await fetchInitialMember(); 
       
-      if (response.success) {
-        set({ user: response.data }); 
-        console.log("유저 정보 초기화 성공:", response.data);
+      if (userRes.success) {
+        // 2. 해당 유저의 소유 도서 목록 가져오기
+        const booksRes = await fetchMyBooks(userRes.data.uuid); 
+        
+        // 3. 유저 정보와 책 목록을 동시에 업데이트!
+        set({ 
+          user: userRes.data,
+          myBooks: booksRes.success ? booksRes.data : [] 
+        }); 
+        
+        console.log("통합 데이터 초기화 완료");
       }
     } catch (error) {
-      console.error("유저 정보를 불러오는 중 에러 발생:", error);
+      console.error("초기화 에러:", error);
     }
-  },
-  
-  updateBalance: (amount) => set((state) => ({
-    user: { ...state.user, balance: state.user.balance + amount }
-  })),
-  
-  buyBook: (book) => set((state) => {
-    const newBook: OwnedBook = {
-      ...book,
-      instanceId: crypto.randomUUID(),
-      purchasedAt: Date.now(),
-    };
-    return {
-      user: { ...state.user, balance: state.user.balance - book.price },
-      myBooks: [...state.myBooks, newBook]
-    };
-  }),
-
-  sellBook: (instanceId) => set((state) => {
-    const bookToSell = state.myBooks.find(b => b.instanceId === instanceId);
-    if (!bookToSell) return state; // 변경 사항 없음(현재 상태 그대로 유지)
-
-    return {
-      user: { ...state.user, balance: state.user.balance + bookToSell.price },
-      myBooks: state.myBooks.filter(b => b.instanceId !== instanceId)
-    };
-  }),
+  }
 }));

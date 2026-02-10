@@ -15,7 +15,7 @@ export const Inventory = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
           {myBooks.map((book) => (
             <BookCard 
-              key={book.id} 
+              key={book.instanceId} 
               book={book} 
               actions={
                 <div style={{ display: 'flex', gap: '10px' }}>

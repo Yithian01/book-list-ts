@@ -15,7 +15,4 @@ export interface UserState {
   user: User;
   myBooks: OwnedBook[]; 
   initUser: () => Promise<void>;
-  updateBalance: (amount: number) => void;
-  buyBook: (book: Book) => void; 
-  sellBook: (instanceId: string) => void; 
 }
